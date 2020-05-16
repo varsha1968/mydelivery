@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "518287642291",
+    "firebase_url": "https://pother-panchali-delivery.firebaseio.com",
+    "project_id": "pother-panchali-delivery",
+    "storage_bucket": "pother-panchali-delivery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518287642291:android:73c0680fa0fde63546eac6",
+        "android_client_info": {
+          "package_name": "com.example.pother_delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518287642291-5h11pnl1per6hb9k6boikfpamlfs4bpm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pother_delivery",
+            "certificate_hash": "c5901436925fa5193df80dc6b641da06d9cdf7e8"
+          }
+        },
+        {
+          "client_id": "518287642291-0op42igd93aa1s7ces9pj3klsbsgfg2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIi2kZXuvpXi9UImSS77NlF5c8CJ3VY3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518287642291-0op42igd93aa1s7ces9pj3klsbsgfg2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

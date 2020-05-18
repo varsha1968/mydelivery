@@ -1,4 +1,4 @@
-#Fri May 15 13:42:09 IST 2020
-base.0=C\:\\Users\\USER\\AndroidStudioProjects\\Pother_delivery\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+#Mon May 18 22:12:33 IST 2020
+base.0=D\:\\Learning\\Stupid Project\\mydelivery\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

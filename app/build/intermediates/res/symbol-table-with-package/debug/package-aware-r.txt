@@ -840,6 +840,7 @@ id packed
 id parent
 id parentPanel
 id percent
+id progressBar
 id progress_circular
 id progress_horizontal
 id radio
@@ -945,6 +946,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout activity_splash_screen
 layout custom_dialog
 layout notification_action
 layout notification_action_tombstone

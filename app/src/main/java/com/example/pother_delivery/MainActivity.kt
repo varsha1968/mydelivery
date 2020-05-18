@@ -13,12 +13,17 @@ import android.os.AsyncTask
 
 
 import android.util.Log
+import android.webkit.WebChromeClient
 import android.widget.Toast
 
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat.isLocationEnabled
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -30,16 +35,18 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity() {
 
     lateinit var serviceIntent:Intent
-
+    lateinit var deliveryBoy: HashMap<String,Any>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val WebView:WebView=findViewById(R.id.WebView)
+        val that=this
         if (WebView!=null){
             val webSettings=WebView!!.settings
             webSettings.javaScriptEnabled=true
-            WebView!!.webViewClient=WebViewClient()
-            WebView!!.loadUrl("http://192.168.43.241/delivery-master/deliveryboy")
+            WebView!!.webChromeClient= WebChromeClient()
+            //WebView!!.loadUrl("http://192.168.43.241/delivery-master/deliveryboy")
+            WebView!!.loadUrl("http://192.168.1.4/deliveryboy/deliveryboy/login.php?token="+FirebaseToken(this).getToken())
             WebView!!.webViewClient=object:WebViewClient(){
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     super.onPageStarted(view, url, favicon)
@@ -47,27 +54,21 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
-
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-
-                val TAG="vazi"
-                if (!task.isSuccessful) {
-                    Log.v(TAG,"Error")
-                    return@OnCompleteListener
+        var ref = FirebaseDatabase.getInstance().reference.child("delivery_boys/"+FirebaseToken(this).getToken())
+        val menuListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if(dataSnapshot.value!=null){
+                    deliveryBoy=dataSnapshot.value as HashMap<String,Any>
+                    FirebaseToken(that).setUserId(deliveryBoy["id"] as String)
+                    Log.v("vazi",deliveryBoy.toString())
+                    Toast.makeText(that,FirebaseToken(that).getUserId().toString(),Toast.LENGTH_LONG).show()
                 }
-                else{
-
-                    // Get new Instance ID token
-                    val token = task.result?.token
-
-                    //
-                    // val msg = getString(R.string.msg_token_fmt, token)
-                    val msg=token
-                    Log.v(TAG,msg)
-                    //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()// Log and toast
-
-                }})
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.v("vazi","Error")
+            }
+        }
+        ref.addValueEventListener(menuListener)
         if(isLocationEnabled()) {
             try {
                 ServiceUtil(this).execute()
